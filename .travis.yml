@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true yosuke65/docker-travisci-aws-demo npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-demo"
+  env: "Dockerdemo-env"
+  bucket_name: "elasticbeanstalk-us-east-1-470285885149"
+  bucket-path: "docker-demo"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
